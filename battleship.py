@@ -7,6 +7,8 @@ Submarine (3)
 Smol boat (2)
 '''
 
+#apaplemaofuyjmccvb
+
 class Player:
     def __init__(self, name, ships_won, ships_lost, no_of_hits):
         self.name = name
