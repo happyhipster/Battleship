@@ -16,59 +16,6 @@ class Player:
         self.ships_lost = ships_lost
         self.no_of_hits = no_of_hits
 
-    def attack(self, p,pos_x, pos_y):
-        attack_pos = input("Attack! (x,y) ")
-        if p == "1":
-            #checking if the coordinates are in p2's battleship list
-            if attack_pos in p2_carrier.list_of_coor:
-                print("Hit! ")
-                p2_carrier.list_of_coor.remove(attack_pos)
-                
-            elif attack_pos in p2_battleship.list_of_coor:
-                print("Hit! ")
-                p2_battleship.list_of_coor.remove(attack_pos)
-
-            elif attack_pos in p2_destroyer.list_of_coor:
-                print("Hit! ")
-                p2_destroyer.list_of_coor.remove(attack_pos)
-            
-            elif attack_pos in p2_submarine.list_of_coor:
-                print("Hit! ")
-                p2_submarine.list_of_coor.remove(attack_pos)
-            
-            elif attack_pos in p2_smol.list_of_coor:
-                print("Hit! ")
-                p2_smol.list_of_coor.remove(attack_pos)
-
-            else:
-                print("Miss ")
-        if p == "2":
-            #checking if the coordinates are in p2's battleship list
-            if attack_pos in p1_carrier.list_of_coor:
-                print("Hit! ")
-                p1_carrier.list_of_coor.remove(attack_pos)
-                
-            elif attack_pos in p1_battleship.list_of_coor:
-                print("Hit! ")
-                p1_battleship.list_of_coor.remove(attack_pos)
-
-            elif attack_pos in p1_destroyer.list_of_coor:
-                print("Hit! ")
-                p1_destroyer.list_of_coor.remove(attack_pos)
-            
-            elif attack_pos in p1_submarine.list_of_coor:
-                print("Hit! ")
-                p1_submarine.list_of_coor.remove(attack_pos)
-            
-            elif attack_pos in p1_smol.list_of_coor:
-                print("Hit! ")
-                p1_smol.list_of_coor.remove(attack_pos)
-
-            else:
-                print("Miss ")
-
-    # def status(self):
-
 
 class Ship:
     def __init__(self, ship_name, length, no_hit, x_1, y_1, x_2, y_2, list_of_coor):
@@ -205,21 +152,72 @@ def p2_checking_phase():
         print("Smol sunk ")
         p2_ships.remove(p2_smol)
 
+def attack(p, pos_x, pos_y):
+    attack_pos = input("Attack! (x,y) ")
+    if p == "1":
+        #checking if the coordinates are in p2's battleship list
+        if attack_pos in p2_carrier.list_of_coor:
+            print("Hit! ")
+            p2_carrier.list_of_coor.remove(attack_pos)
+            
+        elif attack_pos in p2_battleship.list_of_coor:
+            print("Hit! ")
+            p2_battleship.list_of_coor.remove(attack_pos)
 
+        elif attack_pos in p2_destroyer.list_of_coor:
+            print("Hit! ")
+            p2_destroyer.list_of_coor.remove(attack_pos)
+        
+        elif attack_pos in p2_submarine.list_of_coor:
+            print("Hit! ")
+            p2_submarine.list_of_coor.remove(attack_pos)
+        
+        elif attack_pos in p2_smol.list_of_coor:
+            print("Hit! ")
+            p2_smol.list_of_coor.remove(attack_pos)
 
+        else:
+            print("Miss ")
     
+    
+    if p == "2":
+        #checking if the coordinates are in p2's battleship list
+        if attack_pos in p1_carrier.list_of_coor:
+            print("Hit! ")
+            p1_carrier.list_of_coor.remove(attack_pos)
+            
+        elif attack_pos in p1_battleship.list_of_coor:
+            print("Hit! ")
+            p1_battleship.list_of_coor.remove(attack_pos)
+
+        elif attack_pos in p1_destroyer.list_of_coor:
+            print("Hit! ")
+            p1_destroyer.list_of_coor.remove(attack_pos)
+        
+        elif attack_pos in p1_submarine.list_of_coor:
+            print("Hit! ")
+            p1_submarine.list_of_coor.remove(attack_pos)
+        
+        elif attack_pos in p1_smol.list_of_coor:
+            print("Hit! ")
+            p1_smol.list_of_coor.remove(attack_pos)
+
+        else:
+            print("Miss ")    
 
 
-def main():
+def main():  
+    global p1
+    global p2
     print("This code runs a game of battleship. When putting in inputs ensure that the x and y positions of the ships are not above 8, as the field of the battleships game is 8X8")
     setup()
     set_up_player_1()
     set_up_player_2()
     setup_coordinates_p1()
     setup_coordinates_p2()
-    p1.attack("1", None, None)
+    attack("1", None, None)
     p2_checking_phase()
-    p2.attack("2", None, None)
+    attack("2", None, None)
     p1_checking_phase()
 
 
