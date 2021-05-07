@@ -78,7 +78,8 @@ def set_up_player_2():
     global p2_ships
     p2_ships = [p2_carrier, p2_battleship, p2_destroyer, p2_submarine, p2_smol]
 
-def setup_coordinates_p1(): #attempt. This part i need to figure out how to use ship_type to call the class... y'know... cuz i dont
+def setup_coordinates_p1():
+    global p1_ships #attempt. This part i need to figure out how to use ship_type to call the class... y'know... cuz i dont
     for i in range(5):
         ship_type = p1_ships[i]
         if ship_type.x_1 == ship_type.x_2:
@@ -96,9 +97,12 @@ def setup_coordinates_p1(): #attempt. This part i need to figure out how to use 
             while ship_type.x_1 != ship_type.x_2:
                 ship_type.x_1 += 1
                 coor = str(ship_type.x_1 + ',' + ship_type.y_1)
+                print(coor) #debuggin
                 ship_type.list_of_coor.append(coor)
+
     
 def setup_coordinates_p2(): #attempt
+    global p2_ships
     for o in range(5):
         ship_type = p2_ships[o]
         if ship_type.x_1 == ship_type.x_2:
@@ -111,6 +115,7 @@ def setup_coordinates_p2(): #attempt
                 ship_type.y_1 += 1
                 coor = str(ship_type.x_1 + ',' + ship_type.y_1)
                 ship_type.list_of_coor.append(coor)
+                print(ship_type.list_of_coor)
 
         elif ship_direction == "vertical":
             while ship_type.x_1 != ship_type.x_2:
@@ -152,8 +157,20 @@ def p2_checking_phase():
         print("Smol sunk ")
         p2_ships.remove(p2_smol)
 
-def attack(p, pos_x, pos_y):
+def attack(p):
+    global p2_carrier
+    global p2_battleship
+    global p2_destroyer
+    global p2_submarine
+    global p2_smol
+
+    global p1_carrier
+    global p1_battleship
+    global p1_destroyer
+    global p1_submarine
+    global p1_smol
     attack_pos = input("Attack! (x,y) ")
+    
     if p == "1":
         #checking if the coordinates are in p2's battleship list
         if attack_pos in p2_carrier.list_of_coor:
@@ -206,7 +223,7 @@ def attack(p, pos_x, pos_y):
             print("Miss ")    
 
 
-def main():  
+def main():
     global p1
     global p2
     print("This code runs a game of battleship. When putting in inputs ensure that the x and y positions of the ships are not above 8, as the field of the battleships game is 8X8")
@@ -215,9 +232,9 @@ def main():
     set_up_player_2()
     setup_coordinates_p1()
     setup_coordinates_p2()
-    attack("1", None, None)
+    attack("1")
     p2_checking_phase()
-    attack("2", None, None)
+    attack("2")
     p1_checking_phase()
 
 
