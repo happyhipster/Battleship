@@ -235,7 +235,7 @@ def winner(w):
             d +=1 
     
     elif w == 2:
-        if all(stats == False for stats in p1_ships.values()):
+        if all(stats == False for stats in p2_ships.values()):
             print("Player One Wins!")
             d += 1
 
