@@ -126,38 +126,40 @@ def setup_coordinates_p2(): #attempt
                 ship_type.dict_of_coor[coor] = True
 
 def p1_checking_phase(): #try using pop if remove does not work and also try using a dictionary to tell the status of ships (sunk/float)
-    if len(p1_carrier.dict_of_coor) == 0:
+    if all(stat == False for stat in p1_carrier.dict_of_coor.values()):
         print("Carrier sunk ")
-        p1_ships.remove(p1_carrier)
-    elif len(p1_battleship.dict_of_coor) == 0:
+        p1_ships[p1_carrier] = False
+    elif all(stat == False for stat in p1_battleship.dict_of_coor.values()):
         print("Battleship sunk ")
-        p1_ships.remove(p1_battleship)
-    elif len(p1_destroyer.dict_of_coor) == 0:
+        p1_ships[p1_battleship] = False
+    elif all(stat == False for stat in p1_destroyer.dict_of_coor.values()):
         print("Destroyer sunk ")
-        p1_ships.remove(p1_destroyer)
-    elif len(p1_submarine.dict_of_coor) == 0:
+        p1_ships[p1_destroyer] = False
+    elif all(stat == False for stat in p1_submarine.dict_of_coor.values()):
         print("Submarine sunk ")
-        p1_ships.remove(p1_submarine)
-    elif len(p1_smol.dict_of_coor) == 0:
+        p1_ships[p1_submarine] = False
+    elif all(stat == False for stat in p1_smol.dict_of_coor.values()):
         print("Smol sunk ")
-        p1_ships.remove(p1_smol)
-    
-def p2_checking_phase():
-    if len(p2_carrier.dict_of_coor) == 0:
+        p1_ships[p1_smol] = False
+
+
+def p2_checking_phase(): #try using pop if remove does not work and also try using a dictionary to tell the status of ships (sunk/float)
+    if all(stat == False for stat in p2_carrier.dict_of_coor.values()):
         print("Carrier sunk ")
-        p2_ships.remove(p2_carrier)
-    elif len(p2_battleship.dict_of_coor) == 0:
+        p2_ships[p2_carrier] = False
+    elif all(stat == False for stat in p2_battleship.dict_of_coor.values()):
         print("Battleship sunk ")
-        p2_ships.remove(p2_battleship)
-    elif len(p2_destroyer.dict_of_coor) == 0:
+        p2_ships[p2_battleship] = False
+    elif all(stat == False for stat in p2_destroyer.dict_of_coor.values()):
         print("Destroyer sunk ")
-        p2_ships.remove(p2_destroyer)
-    elif len(p2_submarine.dict_of_coor) == 0:
+        p2_ships[p2_destroyer] = False
+    elif all(stat == False for stat in p2_submarine.dict_of_coor.values()):
         print("Submarine sunk ")
-        p2_ships.remove(p2_submarine)
-    elif len(p2_smol.dict_of_coor) == 0:
+        p2_ships[p2_submarine] = False
+    elif all(stat == False for stat in p2_smol.dict_of_coor.values()):
         print("Smol sunk ")
-        p2_ships.remove(p2_smol)
+        p2_ships[p2_smol] = False
+
 
 def attack(p):
     global p2_carrier
@@ -179,23 +181,23 @@ def attack(p):
         #checking if the coordinates are in p2's battleship list while using dictionary
         if attack_pos in p2_carrier.dict_of_coor:
             print("Hit! ")
-            p2_carrier.dict_of_coor.remove(attack_pos)
+            p2_carrier.dict_of_coor[attack_pos] = False
             
         elif attack_pos in p2_battleship.dict_of_coor:
             print("Hit! ")
-            p2_battleship.dict_of_coor.remove(attack_pos)
+            p2_battleship.dict_of_coor[attack_pos] = False
 
         elif attack_pos in p2_destroyer.dict_of_coor:
             print("Hit! ")
-            p2_destroyer.dict_of_coor.remove(attack_pos)
+            p2_destroyer.dict_of_coor[attack_pos] = False
         
         elif attack_pos in p2_submarine.dict_of_coor:
             print("Hit! ")
-            p2_submarine.dict_of_coor.remove(attack_pos)
+            p2_submarine.dict_of_coor[attack_pos] = False
         
         elif attack_pos in p2_smol.dict_of_coor:
             print("Hit! ")
-            p2_smol.dict_of_coor.remove(attack_pos)
+            p2_smol.dict_of_coor[attack_pos] = False
 
         else:
             print("Miss ")
@@ -205,42 +207,55 @@ def attack(p):
         #checking if the coordinates are in p2's battleship list
         if attack_pos in p1_carrier.dict_of_coor:
             print("Hit! ")
-            p1_carrier.dict_of_coor.remove(attack_pos)
+            p1_carrier.dict_of_coor[attack_pos] = False
             
         elif attack_pos in p1_battleship.dict_of_coor:
             print("Hit! ")
-            p1_battleship.dict_of_coor.remove(attack_pos)
+            p1_battleship.dict_of_coor[attack_pos] = False
 
         elif attack_pos in p1_destroyer.dict_of_coor:
             print("Hit! ")
-            p1_destroyer.dict_of_coor.remove(attack_pos)
+            p1_destroyer.dict_of_coor[attack_pos] = False
         
         elif attack_pos in p1_submarine.dict_of_coor:
             print("Hit! ")
-            p1_submarine.dict_of_coor.remove(attack_pos)
+            p1_submarine.dict_of_coor[attack_pos] = False
         
         elif attack_pos in p1_smol.dict_of_coor:
             print("Hit! ")
-            p1_smol.dict_of_coor.remove(attack_pos)
+            p1_smol.dict_of_coor[attack_pos] = False
 
         else:
             print("Miss ")    
 
+def winner(w):
+    if w == 1:
+        if all(stats == False for stats in p1_ships.values()):
+            print("Player Two Wins!")
+            d +=1 
+    
+    elif w == 2:
+        if all(stats == False for stats in p1_ships.values()):
+            print("Player One Wins!")
+            d += 1
 
 def main():
     global p1
     global p2
+    d = 9
     print("This code runs a game of battleship. When putting in inputs ensure that the x and y positions of the ships are not above 8, as the field of the battleships game is 8X8")
     setup()
     set_up_player_1()
     set_up_player_2()
     setup_coordinates_p1()
     setup_coordinates_p2()
-    #while True
-    attack("1")
-    p2_checking_phase()
-    attack("2")
-    p1_checking_phase()
+    while d == 9:
+        attack("1")
+        p2_checking_phase()
+        winner(2)
+        attack("2")
+        p1_checking_phase()
+        winner(1)
 
 
 
