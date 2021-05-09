@@ -7,7 +7,7 @@ Submarine (3)
 Smol boat (2)
 '''
 
-#apaplemaofuyjmccvb
+import os
 
 class Player:
     def __init__(self, name, ships_won, ships_lost, no_of_hits):
@@ -83,7 +83,7 @@ def set_up_player_2():
 def setup_coordinates_p1():
     global p1_ships #attempt. This part i need to figure out how to use ship_type to call the class... y'know... cuz i dont
     for i in range(5):
-        ship_type = list(dict_of_coor)[o]
+        ship_type = p1_ships[i]
         if ship_type.x_1 == ship_type.x_2:
             ship_direction = "vertical"
         elif ship_type.y_1 == ship_type.y_1:
@@ -106,7 +106,7 @@ def setup_coordinates_p1():
 def setup_coordinates_p2(): #attempt
     global p2_ships
     for o in range(5):
-        ship_type = list(dict_of_coor)[o]
+        ship_type = p2_ships[o]
         if ship_type.x_1 == ship_type.x_2:
             ship_direction = "vertical"
         elif ship_type.y_1 == ship_type.y_1:
@@ -173,7 +173,7 @@ def attack(p):
     global p1_destroyer
     global p1_submarine
     global p1_smol
-    attack_pos = input("Attack! (x,y) ")
+    attack_pos = str(input("Attack! (x,y) "))
     
 
     #WORK ON THIS PART NEXT
@@ -248,7 +248,9 @@ def main():
     set_up_player_1()
     set_up_player_2()
     setup_coordinates_p1()
+    os.system("ls")
     setup_coordinates_p2()
+    os.system("ls")
     while d == 9:
         attack("1")
         p2_checking_phase()
